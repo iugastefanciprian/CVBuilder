@@ -1,0 +1,32 @@
+label {
+  font-weight: bold;
+  display: flex;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+form {
+  padding: 10px 10px;
+}
+
+input {
+  display: block;
+  width: 400px;
+  padding: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
