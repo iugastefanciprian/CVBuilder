@@ -1,30 +1,51 @@
 import React, { useState } from 'react';
-import '../../../styles/ProjectHistory/ProjectDetails.css';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import PhoneInput from 'react-phone-input-2';
+import validator from 'validator';
+
 import 'react-phone-input-2/lib/style.css';
+import '../../../styles/ProjectHistory/ProjectDetails.css';
 
 const PersonalInformation = () => {
   const form = useForm();
-  const { register, control } = form;
+  const { register, control, handleSubmit } = form;
   const [phone, setPhone] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const validate = (value) => {
+    if (validator.isURL(value)) {
+      setErrorMessage('Is Valid URL');
+    } else {
+      setErrorMessage('Is Not Valid URL');
+    }
+  };
+
+  const onSubmit = (data) => {
+    console.log('Form Submitted', { ...data, phone: '+' + phone });
+  };
 
   return (
     <div className="form-data">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="picture">Profile Picture</label>
-        <input type="image" id="picture" {...register('picture')} />
+        <input type="file" id="picture" {...register('picture')} />
 
         <label htmlFor="name">Name</label>
         <input type="text" id="name" {...register('name')} />
 
         <label htmlFor="phone">Phone</label>
         <PhoneInput
-          {...register('phone')}
+          id="phone"
+          defaultCountry="ro"
+          className="phone-input"
           flagUrl={'https://flag.pk/flags/4x3/{xx}.svg'}
           value={phone}
           onChange={(phone) => setPhone(phone)}
+          country={'ro'}
+          inputStyle={{
+            background: '#242424',
+          }}
           required
         />
 
@@ -35,10 +56,20 @@ const PersonalInformation = () => {
         <input type="text" id="locaiton" {...register('locaiton')} />
 
         <label htmlFor="linkedin">LinkedIn</label>
-        <input type="text" id="linkedin" {...register('linkedin')} />
+        <input
+          type="text"
+          id="linkedin"
+          {...register('linkedin')}
+          onChange={(e) => validate(e.target.value)}
+        />
 
         <label htmlFor="github">Github</label>
-        <input type="text" id="github" {...register('github')} />
+        <input
+          type="text"
+          id="github"
+          {...register('github')}
+          onChange={(e) => validate(e.target.value)}
+        />
 
         <label htmlFor="whatsapp">Whatsapp</label>
         <input type="text" id="whatsapp" {...register('whatsapp')} />

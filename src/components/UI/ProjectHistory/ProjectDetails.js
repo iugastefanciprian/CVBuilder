@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../../styles/ProjectHistory/ProjectDetails.css';
 import { useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
+
+// For Material UI
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const ProjectDetails = () => {
   const form = useForm();
-  const { register, control } = form;
+  const { register } = form;
 
   return (
     <div className="form-data">
@@ -16,11 +21,25 @@ const ProjectDetails = () => {
         <label htmlFor="position">Position Title</label>
         <input type="text" id="position" {...register('position')} />
 
+        <div className="start-end-dates">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker label="Start Date" views={['year', 'month']} />
+          </DemoContainer>
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DatePicker']}>
+            <DatePicker label="End Date" views={['year', 'month']} />
+          </DemoContainer>
+        </LocalizationProvider>
+        </div>
+        
+
         <label htmlFor="summary">Summary</label>
-        <input type="text" id="summary" {...register('summary')} />
+        <textarea type="text" id="summary" {...register('summary')} />
 
         <label htmlFor="description">Description</label>
-        <input type="text" id="description" {...register('description')} />
+        <textarea type="text" id="description" {...register('description')} />
 
         <label htmlFor="mainSkills">Main Skill</label>
         <input type="text" id="mainSkills" {...register('mainSkills')} />
@@ -34,7 +53,6 @@ const ProjectDetails = () => {
 
         <button>Submit</button>
       </form>
-      <DevTool control={control} />
     </div>
   );
 };

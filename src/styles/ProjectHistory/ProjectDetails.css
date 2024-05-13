@@ -30,3 +30,26 @@ input {
 .form-control {
   margin-bottom: 20px;
 }
+
+.flag-dropdown,
+.flag-dropdown .open,
+.country-list,
+.MuiInputBase-input {
+  color: #fff;
+  background-color: #242424 !important;
+}
+
+.country-list .country:checked,
+.country:hover,
+.country.highlight {
+  background: dodgerblue !important;
+}
+
+.start-end-dates {
+  flex-direction: column;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+}
